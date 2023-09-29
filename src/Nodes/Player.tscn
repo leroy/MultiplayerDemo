@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdamoom8h3otb"]
+
+[ext_resource type="Script" path="res://src/Nodes/Player.cs" id="1_xgi20"]
+[ext_resource type="PackedScene" uid="uid://cco64tjwe0k4g" path="res://assets/Models/Characters/Mage.glb" id="2_ckepy"]
+[ext_resource type="PackedScene" uid="uid://cao03rdndqape" path="res://src/Nodes/Player/PlayerInput.tscn" id="2_mknes"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_grx16"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jky6k"]
+properties/0/path = NodePath(".:Id")
+properties/0/spawn = true
+properties/0/sync = false
+properties/0/watch = false
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/sync = true
+properties/1/watch = false
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01322, 0)
+script = ExtResource("1_xgi20")
+
+[node name="Mage" parent="." instance=ExtResource("2_ckepy")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -1.03929, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_grx16")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.885702, 0.464255, 0, -0.464255, 0.885702, 0, 1.82186, 2.58299)
+
+[node name="PlayerInput" parent="." instance=ExtResource("2_mknes")]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_jky6k")
+
+[node name="PlayerName" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92344, 0)
+text = "Playername
+"

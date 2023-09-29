@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://w0mr7i56yxoq"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_r5bw1"]
+script/source = "using Godot;
+using System;
+
+public partial class NetworkRoot : Node
+{
+	private MultiplayerApi _multiplayer;
+	
+	public NetworkRoot()
+	{
+		_multiplayer = new SceneMultiplayer();
+	}
+	public override void _Notification(int what)
+	{
+		if (what == NotificationEnterTree)
+		{
+			GetTree().Connect(\"node_added\", Callable.From(OnNodeAdded()));
+		}
+	}
+
+	private Action<Node> OnNodeAdded()
+	{
+		return (Node node) =>
+		{
+			var path = node.GetPath().ToString();
+			var myPath = GetPath().ToString();
+			
+			if (path.Substring(0, myPath.Length) != myPath)
+			{
+				return;
+			}
+
+			var relativePath = path.Substring(myPath.Length, path.Length);
+
+			if (relativePath.Length > 0 && !relativePath.StartsWith(\"/\"))
+			{
+				return;
+			}
+
+			node.
+			node.Multiplayer = _multiplayer;
+
+
+# The added node is our child, or child of our child,
+# or child of our child's child, and so on.
+# Let's apply to it our own custom multiplayer
+				node.custom_multiplayer = custom_multiplayer
+
+		};
+	}
+}
+"
+
+[node name="NetworkRoot" type="Node"]
+script = SubResource("CSharpScript_r5bw1")

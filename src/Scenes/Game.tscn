@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d01vw6aki3jqa"]
+
+[ext_resource type="Script" path="res://src/Scenes/Game.cs" id="1_iwxtc"]
+[ext_resource type="Environment" uid="uid://bhfsx1du35f2i" path="res://assets/default_environment.tres" id="2_hwxfr"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dsc6d"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hfkwx"]
+albedo_color = Color(0.521569, 0.741176, 0.45098, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_er50a"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_iwxtc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(24.1225, 0, 0, 0, 0.166832, 0, 0, 0, 24.8807, 0, 0, 0)
+mesh = SubResource("BoxMesh_dsc6d")
+surface_material_override/0 = SubResource("StandardMaterial3D_hfkwx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_er50a")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_hwxfr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.390587, 0.920566, 0, -0.920566, 0.390587, 0, 4.54012, 0)
+light_color = Color(0.847059, 0.788235, 0.690196, 1)
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/Nodes/Player.tscn")
+spawn_path = NodePath("../Players")
+
+[node name="Players" type="Node3D" parent="."]

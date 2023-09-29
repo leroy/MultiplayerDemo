@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://n0nxlqb0u6pb"]
+
+[ext_resource type="Script" path="res://src/Scenes/Client.cs" id="1_hb2mf"]
+
+[node name="Client" type="Node"]
+script = ExtResource("1_hb2mf")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://src/Scenes/Game.tscn")
+spawn_path = NodePath("../Level")
+spawn_limit = 1

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://tixkoqklaqas"]
+
+[ext_resource type="PackedScene" uid="uid://bv3cgbyfid3fn" path="res://src/Nodes/Tank.tscn" id="1_gsmnv"]
+[ext_resource type="Script" path="res://src/Nodes/ThirdPersonCamera.cs" id="2_u2ymb"]
+[ext_resource type="PackedScene" uid="uid://coa3v5wrvtslq" path="res://src/Nodes/World/GeneratedWorld.tscn" id="3_aeo0e"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_etkwi"]
+
+[node name="PlayerTesting" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.587884, 0.808945, 0, -0.808945, -0.587884, 0, 9.32477, 0)
+
+[node name="Tank" parent="." instance=ExtResource("1_gsmnv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20139, 0)
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="." node_paths=PackedStringArray("Follow")]
+transform = Transform3D(-3.78552e-08, 0.5, -0.866025, 2.18557e-08, 0.866025, 0.5, 1, 0, -4.37114e-08, -4.51061, 5.46069, 0)
+current = true
+script = ExtResource("2_u2ymb")
+Follow = NodePath("../Tank")
+
+[node name="GeneratedWorld" parent="." instance=ExtResource("3_aeo0e")]
+Noise = SubResource("FastNoiseLite_etkwi")

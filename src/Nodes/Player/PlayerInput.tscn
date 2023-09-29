@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cao03rdndqape"]
+
+[ext_resource type="Script" path="res://src/Nodes/Player/PlayerInput.cs" id="1_kcsfi"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r2nxj"]
+properties/0/path = NodePath("PlayerInput:Direction")
+properties/0/spawn = false
+properties/0/sync = true
+properties/0/watch = false
+
+[node name="PlayerInput" type="MultiplayerSynchronizer"]
+replication_config = SubResource("SceneReplicationConfig_r2nxj")
+script = ExtResource("1_kcsfi")
